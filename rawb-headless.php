@@ -4,7 +4,7 @@
     Plugin Name: RAWB Headless Helper
     Plugin URI: http://24hr.se
     Description: Saves content to a Draft Content Service and gives the possibility to push the content to live
-    Version: 0.5.0
+    Version: 0.8.1
     Author: Camilo Tapia <camilo.tapia@24hr.se>
     */
 
@@ -37,6 +37,7 @@
             header("x-content-parent: $post->post_parent");
             header("x-content-order: $post->menu_order");
             header("x-content-resource-last-updated: " . date('Y-m-d H:i:s.u +00:00', $publish_date));
+            header("x-site-hostname:" . $_SERVER['SERVER_NAME']);
 
             // We have this as part of the data, as well as part of the meta, since we want to use it as content as well
             $this->data->id = $ID;
