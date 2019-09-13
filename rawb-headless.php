@@ -4,7 +4,7 @@
     Plugin Name: RAWB Headless Helper
     Plugin URI: http://24hr.se
     Description: Saves content to a Draft Content Service and gives the possibility to push the content to live
-    Version: 0.8.2
+    Version: 0.8.3
     Author: Camilo Tapia <camilo.tapia@24hr.se>
     */
 
@@ -126,7 +126,7 @@
         }
 
         // Append data to your final object
-        public function append_data(data) {
+        public function append_data($data) {
             $this->data = (object) array_merge((array) $this->data, (array) $data);
         }
 
