@@ -125,6 +125,11 @@
             return RAWBHeadless::send_json($data);
         }
 
+        // Append data to your final object
+        public function append_data(data) {
+            $this->data = (object) array_merge((array) $this->data, (array) $data);
+        }
+
         static function send_json($data) {
 
             if($skip_guid_validation !== true) {
