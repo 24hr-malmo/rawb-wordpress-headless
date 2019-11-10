@@ -4,7 +4,7 @@
     Plugin Name: RAWB Headless Helper
     Plugin URI: http://24hr.se
     Description: Saves content to a Draft Content Service and gives the possibility to push the content to live
-    Version: 0.8.5
+    Version: 0.8.6
     Author: Camilo Tapia <camilo.tapia@24hr.se>
     */
 
@@ -134,7 +134,7 @@
 
         static function send_json($data, $skip_guid_validation = false) {
 
-            if(skip_guid_validation !== true) {
+            if($skip_guid_validation !== true) {
                 // Validate that data contains a guid!
                 if (!property_exists($data, 'guid')) {
                     http_response_code(422);
@@ -145,7 +145,6 @@
                     die();
                 }
             }
-            $publish_date = date('Y-m-d H:i:s.u +00:00', $data->publish_date);
 
             $json_string = json_encode($data);
 
