@@ -104,7 +104,7 @@
         public function populate_page() {
 
             $this->data->post_title = $this->post->post_title;
-            $this->data->permalink = get_permalink($this->ID);
+            $this->data->permalink = rtrim(get_permalink($this->ID), '/');
             $this->data->guid = sprintf('%s-%d', $this->template, $this->ID);
 
             $post_content = str_replace('&nbsp;', ' ', $this->post->post_content);
