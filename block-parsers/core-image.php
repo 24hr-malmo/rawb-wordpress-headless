@@ -4,6 +4,11 @@
 
         $parsed_block = new stdclass();
 
+        // Autocopy all attributes
+        foreach ($block->attrs as $key => $value) {
+            $parsed_block->{$key} = $block->attrs[$key];
+        }
+
         $image = new stdclass();
 
         $image_id = $block->attrs['id'];
