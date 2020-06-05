@@ -4,7 +4,7 @@
     Plugin Name: RAWB Headless Helper
     Plugin URI: http://24hr.se
     Description: Saves content to a Draft Content Service and gives the possibility to push the content to live
-    Version: 0.8.9
+    Version: 0.8.10
     Author: Camilo Tapia <camilo.tapia@24hr.se>
     */
 
