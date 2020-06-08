@@ -6,7 +6,8 @@
         $value = preg_replace('/<p>|<\/p>/', '', $block->innerHTML);
 
         // This makes sure we allow the shy tag
-        $parsed_block->content = preg_replace(['/&lt;/', '/&amp;shy;/'], ['<', '&shy;'], utf8_decode($value));
+        // $parsed_block->content = preg_replace(['/&lt;/', '/&amp;shy;/'], ['<', '&shy;'], utf8_decode($value));
+        $parsed_block->content = preg_replace(['/&lt;/', '/&amp;shy;/'], ['<', '&shy;'], $value);
         $parsed_block->tag = 'p';
 
         // Autocopy all attributes
