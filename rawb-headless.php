@@ -91,6 +91,8 @@
                     $parsed_block->blockName = $block->blockName;
                 }
 
+                $parsed_block->hash = md5(json_encode($parsed_block));
+
                 if ($block->blockName) {
                     array_push($block_list, $parsed_block);
                 }
