@@ -4,7 +4,7 @@
     Plugin Name: RAWB Headless Helper
     Plugin URI: http://24hr.se
     Description: Saves content to a Draft Content Service and gives the possibility to push the content to live
-    Version: 0.8.14
+    Version: 0.8.15
     Author: Camilo Tapia <camilo.tapia@24hr.se>
     */
 
@@ -110,7 +110,7 @@
             $this->data->post_title = $this->post->post_title;
             $this->data->permalink = rtrim(get_permalink($this->ID), '/');
             $this->data->guid = $this->guid;
-            $this->data->externaId = $this->guid;
+            $this->data->externalId = $this->guid;
 
             $post_content = str_replace('&nbsp;', ' ', $this->post->post_content);
 
@@ -140,7 +140,7 @@
         }
 
         public function setExternalId($id) {
-            $this->externa_id = $id;
+            $this->external_id = $id;
         }
 
         public function setGuid($id) {
