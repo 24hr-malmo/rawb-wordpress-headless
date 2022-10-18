@@ -1,0 +1,12 @@
+{
+    "name": "24hr/rawb-wordpress-headless",
+    "description": "Saves content to a Draft Content Service and gives the possibility to push the content to live",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "Camilo Tapia",
+            "email": "camilo.tapia@24hr.se"
+        }
+    ],
+    "require": {}
+}
