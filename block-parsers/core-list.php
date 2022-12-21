@@ -8,7 +8,12 @@
             $parsed_block->{$key} = $block->attrs[$key];
         }
 
-        $parsed_block->content = $block->innerHTML;
+        if ($block->innerBlocks) {
+            $parsed_block->content = $block->innerBlocks;
+        } else {
+            $parsed_block->content = $block->innerHTML;
+        }
+        
         return $parsed_block;
     });
 
