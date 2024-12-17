@@ -4,7 +4,7 @@
     Plugin Name: RAWB Headless Helper
     Plugin URI: http://24hr.se
     Description: Saves content to a Draft Content Service and gives the possibility to push the content to live
-    Version: 0.8.16
+    Version: 0.8.17
     Author: Camilo Tapia <camilo.tapia@24hr.se>
     */
 
@@ -21,6 +21,7 @@
         private $ID;
         private $post;
         private $data;
+        private $meta;
         private $template;
         private $publish_date;
         private $skip_guid_validation;
@@ -31,6 +32,7 @@
             $this->post = $post;
             $this->template = $document_type;
             $this->data = new stdclass();
+            $this->meta = new stdclass();
             $this->publish_date = $publish_date;
             $this->skip_guid_validation = false;
             $this->guid = sprintf('%s-%d', $this->template, $this->ID);
@@ -131,12 +133,24 @@
         /* publish_date should be unix timestamp */
         public function send() {
             $data = $this->data;
+
+            // We only send $data, so we append the meta to it (upon receiving it Cerberus will split it into meta and data before sending to the content service)
+            $data->dls_meta_data = $this->meta;
             return RAWBHeadless::send_json($data);
         }
 
         // Append data to your final object
         public function append_data($data) {
             $this->data = (object) array_merge((array) $this->data, (array) $data);
+        }
+
+        /**
+         * Meta will be used by cerberus to populate meta column in the database.
+         * We have meta come in via "append_meta" even though we later merge it with the data object in the "send" function
+         * to not have meta data pollute the data object.
+         */
+        public function append_meta($meta) {
+            $this->meta = (object) array_merge((array) $this->meta, (array) $meta);
         }
 
         public function setExternalId($id) {
