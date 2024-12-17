@@ -133,6 +133,8 @@
         /* publish_date should be unix timestamp */
         public function send() {
             $data = $this->data;
+
+            // We only send $data, so we append the meta to it (upon receiving it Cerberus will split it into meta and data before sending to the content service)
             $data->dls_meta_data = $this->meta;
             return RAWBHeadless::send_json($data);
         }
@@ -142,7 +144,11 @@
             $this->data = (object) array_merge((array) $this->data, (array) $data);
         }
 
-        // Meta will be used by cerberus to populate meta column in the database
+        /**
+         * Meta will be used by cerberus to populate meta column in the database.
+         * We have meta come in via "append_meta" even though we later merge it with the data object in the "send" function
+         * to not have meta data pollute the data object.
+         */
         public function append_meta($meta) {
             $this->meta = (object) array_merge((array) $this->meta, (array) $meta);
         }
