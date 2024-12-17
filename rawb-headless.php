@@ -21,6 +21,7 @@
         private $ID;
         private $post;
         private $data;
+        private $meta;
         private $template;
         private $publish_date;
         private $skip_guid_validation;
@@ -31,6 +32,7 @@
             $this->post = $post;
             $this->template = $document_type;
             $this->data = new stdclass();
+            $this->meta = new stdclass();
             $this->publish_date = $publish_date;
             $this->skip_guid_validation = false;
             $this->guid = sprintf('%s-%d', $this->template, $this->ID);
@@ -131,12 +133,18 @@
         /* publish_date should be unix timestamp */
         public function send() {
             $data = $this->data;
+            $data->dls_meta_data = $this->meta;
             return RAWBHeadless::send_json($data);
         }
 
         // Append data to your final object
         public function append_data($data) {
             $this->data = (object) array_merge((array) $this->data, (array) $data);
+        }
+
+        // Meta will be used by cerberus to populate meta column in the database
+        public function append_meta($meta) {
+            $this->meta = (object) array_merge((array) $this->meta, (array) $meta);
         }
 
         public function setExternalId($id) {
