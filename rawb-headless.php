@@ -32,7 +32,7 @@
             $this->post = $post;
             $this->template = $document_type;
             $this->data = new stdclass();
-            $this->meta = new stdclass();
+            $this->meta = null;
             $this->publish_date = $publish_date;
             $this->skip_guid_validation = false;
             $this->guid = sprintf('%s-%d', $this->template, $this->ID);
@@ -134,8 +134,11 @@
         public function send() {
             $data = $this->data;
 
-            // We only send $data, so we append the meta to it (upon receiving it Cerberus will split it into meta and data before sending to the content service)
-            $data->dls_meta_data = $this->meta;
+            // We only send $data, so we append the meta content to it (upon receiving it Cerberus will split it into meta and data before sending to the content service)
+            if ($this->meta !== null) {
+                $data->dls_meta_data = $this->meta;
+            }
+
             return RAWBHeadless::send_json($data);
         }
 
